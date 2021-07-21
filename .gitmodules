@@ -1,10 +1,10 @@
 [submodule "qbs"]
 	path = src/shared/qbs
-	url = ../../qbs/qbs.git
+	url = https://code.qt.io/qbs/qbs.git
 	ignore = dirty
 [submodule "perfparser"]
 	path = src/tools/perfparser
-	url = ../perfparser.git
+	url = https://code.qt.io/qt-creator/perfparser.git
 	ignore = dirty
 [submodule "src/libs/qlitehtml"]
 	path = src/libs/qlitehtml
