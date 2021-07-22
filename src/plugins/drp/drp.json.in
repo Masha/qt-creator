@@ -1,0 +1,9 @@
+{
+    \"Name\" : \"drp\",
+    \"Version\" : \"0.0.2\",
+    \"CompatVersion\" : \"0.0.2\",
+    \"Copyright\" : \"(C) theSuite 2017, Miezhiko 2021\",
+    \"License\" : \"GPL v3\",
+    \"Description\" : \"Integrate Qt Creator with Discord Rich Presence\",
+    $$dependencyList
+}
