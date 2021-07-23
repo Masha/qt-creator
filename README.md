@@ -1,3 +1,10 @@
+# Ghoul
+
+ - Minimap Plugin (hadny modern age scrollbar)
+ - Dirscord Rich Presence Plugin
+ - Menubar Toggle Button and Hotkey
+ - ... work in progress
+
 # Qt Creator
 
 Qt Creator is a cross-platform, integrated development environment (IDE) for
