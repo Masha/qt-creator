@@ -12,6 +12,7 @@ enum OutputFormat
     LogMessageFormat,
     DebugFormat,
     StdOutFormat,
+    StdWarningFormat,
     StdErrFormat,
     GeneralMessageFormat,
     NumberOfFormats // Keep this entry last.

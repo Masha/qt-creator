@@ -3,6 +3,7 @@
  - Minimap Plugin (hadny modern age scrollbar)
  - Dirscord Rich Presence Plugin
  - Menubar Toggle Button and Hotkey
+ - Different colors for Warnings and Errors in Compile output window
  - ... work in progress
 
 # Qt Creator

@@ -524,9 +524,11 @@ void OutputFormatter::initFormats()
     d->formats[ErrorMessageFormat].setForeground(creatorColor(Theme::OutputPanes_ErrorMessageTextColor));
     d->formats[LogMessageFormat].setForeground(creatorColor(Theme::OutputPanes_WarningMessageTextColor));
     d->formats[StdOutFormat].setForeground(creatorColor(Theme::OutputPanes_StdOutTextColor));
+    d->formats[StdWarningFormat].setForeground(creatorColor(Theme::OutputPanes_WarningMessageTextColor));
     d->formats[StdErrFormat].setForeground(creatorColor(Theme::OutputPanes_StdErrTextColor));
     d->formats[DebugFormat].setForeground(creatorColor(Theme::OutputPanes_DebugTextColor));
     d->formats[GeneralMessageFormat].setForeground(creatorColor(Theme::OutputPanes_DebugTextColor));
+
     setBoldFontEnabled(d->boldFontEnabled);
 }
 
