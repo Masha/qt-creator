@@ -48,6 +48,7 @@ const char OPTIONS_PAGE_ID[] = "C.ProjectExplorer.CompileOutputOptions";
 
 CompileOutputWindow::CompileOutputWindow(QAction *cancelBuildAction) :
     m_cancelBuildButton(new QToolButton),
+    m_stdErrContext(Utils::StdWarningFormat),
     m_settingsButton(new QToolButton)
 {
     setId("CompileOutput");
@@ -172,8 +173,19 @@ void CompileOutputWindow::appendText(const QString &text, BuildStep::OutputForma
     case BuildStep::OutputFormat::Stdout:
         fmt = Utils::StdOutFormat;
         break;
-    case BuildStep::OutputFormat::Stderr:
-        fmt = Utils::StdErrFormat;
+    case BuildStep::OutputFormat::Stderr: {
+            const auto lowerText = text.toLower();
+            if (lowerText.contains("warning:")) {
+                m_stdErrContext = Utils::StdWarningFormat;
+            } else if (lowerText.contains("error:")) {
+                m_stdErrContext = Utils::StdErrFormat;
+            }
+            if (m_stdErrContext == Utils::StdWarningFormat) {
+                fmt = Utils::StdWarningFormat;
+            } else {
+                fmt = Utils::StdErrFormat;
+            }
+        }
         break;
     case BuildStep::OutputFormat::NormalMessage:
         fmt = Utils::NormalMessageFormat;
