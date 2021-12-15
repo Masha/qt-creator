@@ -20,6 +20,8 @@
 
 #pragma once
 
+#include "minimapstyle.h"
+
 #include <QObject>
 
 namespace Minimap
@@ -31,13 +33,15 @@ class MinimapSettingsPage;
 class MinimapSettings : public QObject
 {
    Q_OBJECT
+
 public:
    explicit MinimapSettings(QObject* parent);
    ~MinimapSettings();
 
-   void toMap(const QString& prefix, QVariantMap* map) const;
-   void fromMap(const QString& prefix, const QVariantMap& map);
+   QVariantMap toMap() const;
+   void fromMap(const QVariantMap &map);
 
+private:
    static MinimapSettings* instance();
 
    static bool enabled();
@@ -64,6 +68,9 @@ private:
    int m_lineCountThreshold;
    int m_alpha;
    MinimapSettingsPage* m_settingsPage;
+
+   friend MinimapStyleObject;
+   friend MinimapStyle;
 };
 }
 }

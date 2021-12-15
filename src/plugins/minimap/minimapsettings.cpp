@@ -191,8 +191,9 @@ MinimapSettings::MinimapSettings(QObject* parent)
 {
    QTC_ASSERT(!m_instance, return );
    m_instance = this;
-   const QSettings* s = Core::ICore::settings();
-   Utils::fromSettings(minimapPostFix, QLatin1String("text"), s, m_instance);
+   QSettings* s = Core::ICore::settings();
+   Utils::fromSettings(QLatin1String(minimapPostFix), QString("text"), s, m_instance);
+
    m_settingsPage = new MinimapSettingsPage(this);
    ExtensionSystem::PluginManager::addObject(m_settingsPage);
 }
@@ -208,25 +209,27 @@ MinimapSettings* MinimapSettings::instance()
    return m_instance;
 }
 
-void MinimapSettings::toMap(const QString& prefix, QVariantMap* map) const
+QVariantMap MinimapSettings::toMap() const
 {
-   map->insert(prefix + QLatin1String(enabledKey), m_enabled);
-   map->insert(prefix + QLatin1String(widthKey), m_width);
-   map->insert(prefix + QLatin1String(lineCountThresholdKey),
+   QVariantMap map;
+   map.insert(QLatin1String(enabledKey), m_enabled);
+   map.insert(QLatin1String(widthKey), m_width);
+   map.insert(QLatin1String(lineCountThresholdKey),
                m_lineCountThreshold);
-   map->insert(prefix + QLatin1String(alphaKey), m_alpha);
+   map.insert( QLatin1String(alphaKey), m_alpha);
+   return map;
 }
 
-void MinimapSettings::fromMap(const QString& prefix, const QVariantMap& map)
+void MinimapSettings::fromMap(const QVariantMap &map)
 {
    m_enabled =
-      map.value(prefix + QLatin1String(enabledKey), m_enabled).toBool();
-   m_width = map.value(prefix + QLatin1String(widthKey), m_width).toInt();
+      map.value(QLatin1String(enabledKey), m_enabled).toBool();
+   m_width = map.value(QLatin1String(widthKey), m_width).toInt();
    m_lineCountThreshold =
-      map.value(prefix + QLatin1String(lineCountThresholdKey),
+      map.value(QLatin1String(lineCountThresholdKey),
                 m_lineCountThreshold)
          .toInt();
-   m_alpha = map.value(prefix + QLatin1String(alphaKey), m_alpha).toInt();
+   m_alpha = map.value(QLatin1String(alphaKey), m_alpha).toInt();
 }
 
 bool MinimapSettings::enabled()
