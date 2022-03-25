@@ -28,31 +28,30 @@ class QStyle;
 
 namespace Core
 {
-class IEditor;
+  class IEditor;
 }
 
 namespace Minimap
 {
-namespace Internal
-{
+  namespace Internal
+  {
+    class MinimapPlugin : public ExtensionSystem::IPlugin
+    {
+      Q_OBJECT
+      Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE
+                            "Minimap.json")
 
-class Minimap : public ExtensionSystem::IPlugin
-{
-   Q_OBJECT
-   Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE
-                         "Minimap.json")
+    public:
+      MinimapPlugin();
 
-public:
-   Minimap();
+      ~MinimapPlugin();
 
-   ~Minimap();
+      bool initialize(const QStringList& arguments, QString* errorString);
+      void extensionsInitialized();
+      ShutdownFlag aboutToShutdown();
 
-   bool initialize(const QStringList& arguments, QString* errorString);
-   void extensionsInitialized();
-   ShutdownFlag aboutToShutdown();
-
-private:
-   void editorCreated(Core::IEditor* editor, const QString& fileName);
-};
-}
+    private:
+       void editorCreated(Core::IEditor* editor, const QString& fileName);
+    };
+  }
 }

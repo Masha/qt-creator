@@ -69,51 +69,51 @@ inline bool updatePixel(QRgb* scanLine,
                         const QColor& bg,
                         const QColor& fg)
 {
-   if (c == QChar::Tabulation)
-   {
-      for (int i = 0; i < tab; ++i)
+  if (c == QChar::Tabulation)
+  {
+     for (int i = 0; i < tab; ++i)
+     {
+      if (!blend)
       {
-         if (!blend)
-         {
-            scanLine[x++] = bg.rgb();
-         }
-         if (x >= w)
-         {
-            return false;
-         }
-      }
-   }
-   else
-   {
-      bool isSpace = c.isSpace();
-      if (blend && !isSpace)
-      {
-         QColor result =
-            blendColors(fg.toCmyk(), QColor(scanLine[x]).toCmyk()).toRgb();
-         scanLine[x++] = result.rgb();
-      }
-      else
-      {
-         scanLine[x++] = isSpace ? bg.rgb() : fg.rgb();
+        scanLine[x++] = bg.rgb();
       }
       if (x >= w)
       {
-         return false;
+        return false;
       }
-   }
-   return true;
+    }
+  }
+  else
+  {
+    bool isSpace = c.isSpace();
+    if (blend && !isSpace)
+    {
+        QColor result =
+           blendColors(fg.toCmyk(), QColor(scanLine[x]).toCmyk()).toRgb();
+       scanLine[x++] = result.rgb();
+    }
+    else
+    {
+      scanLine[x++] = isSpace ? bg.rgb() : fg.rgb();
+    }
+    if (x >= w)
+    {
+      return false;
+    }
+  }
+  return true;
 }
 
 inline void merge(QColor& bg, QColor& fg, const QTextCharFormat& f)
 {
-   if (f.background().style() != Qt::NoBrush)
-   {
-      bg = f.background().color();
-   }
-   if (f.foreground().style() != Qt::NoBrush)
-   {
-      fg = f.foreground().color();
-   }
+  if (f.background().style() != Qt::NoBrush)
+  {
+    bg = f.background().color();
+  }
+  if (f.foreground().style() != Qt::NoBrush)
+  {
+    fg = f.foreground().color();
+  }
 }
 }
 
@@ -632,7 +632,8 @@ bool MinimapStyle::drawMinimap(const QStyleOptionComplex* option,
 QObject* MinimapStyle::createMinimapStyleObject(
    TextEditor::BaseTextEditor* editor)
 {
-   return new MinimapStyleObject(editor);
+  return new MinimapStyleObject(editor);
 }
+
 }
 }

@@ -33,53 +33,49 @@ namespace Minimap
 {
 namespace Internal
 {
-Minimap::Minimap()
-{
-}
+  MinimapPlugin::MinimapPlugin() {}
 
-Minimap::~Minimap()
-{
-}
+  MinimapPlugin::~MinimapPlugin() {}
 
-bool Minimap::initialize(const QStringList& arguments, QString* errorMessage)
-{
-   Q_UNUSED(arguments)
-   Q_UNUSED(errorMessage)
+  bool MinimapPlugin::initialize(const QStringList& arguments, QString* errorMessage)
+  {
+     Q_UNUSED(arguments)
+     Q_UNUSED(errorMessage)
 
-   new MinimapSettings(this);
+     new MinimapSettings(this);
 
-   qApp->setStyle(new MinimapStyle(qApp->style()));
+     qApp->setStyle(new MinimapStyle(qApp->style()));
 
-   Core::EditorManager* em = Core::EditorManager::instance();
-   connect(em, &Core::EditorManager::editorCreated, this,
-           &Minimap::editorCreated);
+     Core::EditorManager* em = Core::EditorManager::instance();
+     connect(em, &Core::EditorManager::editorCreated, this,
+             &MinimapPlugin::editorCreated);
 
-   return true;
-}
+     return true;
+  }
 
-void Minimap::extensionsInitialized()
-{
-}
+  void MinimapPlugin::extensionsInitialized()
+  {
+  }
 
-ExtensionSystem::IPlugin::ShutdownFlag Minimap::aboutToShutdown()
-{
-   MinimapStyle* style = qobject_cast<MinimapStyle*>(qApp->style());
-   if (style)
-   {
-      qApp->setStyle(style->baseStyle());
-   }
-   return SynchronousShutdown;
-}
+  ExtensionSystem::IPlugin::ShutdownFlag MinimapPlugin::aboutToShutdown()
+  {
+     MinimapStyle* style = qobject_cast<MinimapStyle*>(qApp->style());
+     if (style)
+     {
+        qApp->setStyle(style->baseStyle());
+     }
+     return SynchronousShutdown;
+  }
 
-void Minimap::editorCreated(Core::IEditor* editor, const QString& fileName)
-{
-   Q_UNUSED(fileName);
-   TextEditor::BaseTextEditor* baseEditor =
-      qobject_cast<TextEditor::BaseTextEditor*>(editor);
-   if (baseEditor)
-   {
-      MinimapStyle::createMinimapStyleObject(baseEditor);
-   }
-}
+  void MinimapPlugin::editorCreated(Core::IEditor* editor, const QString& fileName)
+  {
+     Q_UNUSED(fileName);
+     TextEditor::BaseTextEditor* baseEditor =
+        qobject_cast<TextEditor::BaseTextEditor*>(editor);
+     if (baseEditor)
+     {
+        MinimapStyle::createMinimapStyleObject(baseEditor);
+     }
+  }
 }
 }
