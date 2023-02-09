@@ -519,25 +519,6 @@ UpgradingSettingsAccessor::validateVersionRange(const RestoreData &data) const
         return result;
     }
 
-    const QByteArray readId = settingsIdFromMap(result.data);
-    if (!settingsId().isEmpty() && !readId.isEmpty() && readId != settingsId()) {
-        Issue i(Tr::tr("Settings File for \"%1\" from a Different Environment?")
-                .arg(m_applicationDisplayName),
-                Tr::tr("<p>No settings file created by this instance "
-                       "of %1 was found.</p>"
-                       "<p>Did you work with this project on another machine or "
-                       "using a different settings path before?</p>"
-                       "<p>Do you still want to load the settings file \"%2\"?</p>")
-                .arg(m_applicationDisplayName, result.path.toUserOutput()), Issue::Type::WARNING);
-        i.defaultButton = QMessageBox::No;
-        i.escapeButton = QMessageBox::No;
-        i.buttons.clear();
-        i.buttons.insert(QMessageBox::Yes, Continue);
-        i.buttons.insert(QMessageBox::No, DiscardAndContinue);
-        result.issue = i;
-        return result;
-    }
-
     return result;
 }
 
