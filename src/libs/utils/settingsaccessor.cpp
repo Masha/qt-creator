@@ -320,14 +320,11 @@ int VersionedBackUpStrategy::compare(const SettingsAccessor::RestoreData &data1,
                                      const SettingsAccessor::RestoreData &data2) const
 {
     const int origVersion = versionFromMap(data1.data);
-    const bool origValid = m_accessor->isValidVersionAndId(origVersion, settingsIdFromMap(data1.data));
-
     const int newVersion = versionFromMap(data2.data);
-    const bool newValid = m_accessor->isValidVersionAndId(newVersion, settingsIdFromMap(data2.data));
 
-    if ((!origValid && !newValid) || (origValid && newValid && origVersion == newVersion))
+    if (origVersion == newVersion)
         return 0;
-    if ((!origValid &&  newValid) || (origValid && newValid && origVersion < newVersion))
+    if (origVersion < newVersion)
         return 1;
     return -1;
 }
@@ -419,13 +416,6 @@ int UpgradingSettingsAccessor::firstSupportedVersion() const
 int UpgradingSettingsAccessor::lastSupportedVersion() const
 {
     return m_upgraders.size() == 0 ? -1 : m_upgraders.back()->version();
-}
-
-bool UpgradingSettingsAccessor::isValidVersionAndId(const int version, const QByteArray &id) const
-{
-    return (version >= 0
-            && version >= firstSupportedVersion() && version <= currentVersion())
-            && (id.isEmpty() || id == m_id || m_id.isEmpty());
 }
 
 SettingsAccessor::RestoreData UpgradingSettingsAccessor::readData(const FilePath &path,
