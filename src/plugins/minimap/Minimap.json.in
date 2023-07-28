@@ -1,11 +1,11 @@
 {
-    \"Name\" : \"Minimap\",
-    \"Version\" : \"$$QTCREATOR_VERSION\",
-    \"CompatVersion\" : \"$$QTCREATOR_COMPAT_VERSION\",
-    \"Vendor\" : \"emJay Software Consulting AB\",
-    \"Copyright\" : \"(C) 2017 emJay SOftware Consulting AB\",
-    \"License\" : \"GNU LGPL 2.1\",
-    \"Category\" : \"Qt Creator\",
-    \"Description\" : \"Minimap Scrollbar\",
-    $$dependencyList
+    "Name" : "Minimap",
+    "Version" : "${IDE_VERSION}",
+    "CompatVersion" : "${IDE_VERSION_COMPAT}",
+    "Vendor" : "Miezhinko (based on emJay)",
+    "Copyright" : "(C) ${IDE_COPYRIGHT_YEAR} Miezhinko",
+    "License" : "GNU LGPL 2.1",
+    "Category" : "Qt Creator",
+    "Description" : "Minimap Scrollbar",
+    ${IDE_PLUGIN_DEPENDENCIES}
 }
