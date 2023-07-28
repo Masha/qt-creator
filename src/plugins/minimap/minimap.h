@@ -26,6 +26,11 @@
 
 class QStyle;
 
+namespace Utils
+{
+  class FilePath;
+}
+
 namespace Core
 {
   class IEditor;
@@ -51,7 +56,7 @@ namespace Minimap
       ShutdownFlag aboutToShutdown();
 
     private:
-       void editorCreated(Core::IEditor* editor, const QString& fileName);
+       void onEditorCreated(Core::IEditor *editor, const Utils::FilePath &filePath);
     };
   }
 }

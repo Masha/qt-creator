@@ -48,7 +48,7 @@ namespace Internal
 
      Core::EditorManager* em = Core::EditorManager::instance();
      connect(em, &Core::EditorManager::editorCreated, this,
-             &MinimapPlugin::editorCreated);
+             &MinimapPlugin::onEditorCreated);
 
      return true;
   }
@@ -67,9 +67,9 @@ namespace Internal
      return SynchronousShutdown;
   }
 
-  void MinimapPlugin::editorCreated(Core::IEditor* editor, const QString& fileName)
+  void MinimapPlugin::onEditorCreated(Core::IEditor *editor, const Utils::FilePath &filePath)
   {
-     Q_UNUSED(fileName);
+     Q_UNUSED(filePath);
      TextEditor::BaseTextEditor* baseEditor =
         qobject_cast<TextEditor::BaseTextEditor*>(editor);
      if (baseEditor)
