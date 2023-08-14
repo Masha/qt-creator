@@ -563,7 +563,7 @@ bool MinimapStyle::drawMinimap(const QStyleOptionComplex* option,
             QColor fBg = bBg;
             QColor fFg = bFg;
             merge(fBg, fFg, f.charFormat());
-            foreach(const QChar& c, f.text())
+            for (const QChar& c: f.text())
             {
                QColor bg = fBg;
                QColor fg = fFg;
