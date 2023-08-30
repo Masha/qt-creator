@@ -22,6 +22,8 @@
 
 #include "minimapstyle.h"
 
+#include <utils/store.h>
+
 #include <QObject>
 
 namespace Minimap
@@ -38,8 +40,8 @@ public:
    explicit MinimapSettings(QObject* parent);
    ~MinimapSettings();
 
-   QVariantMap toMap() const;
-   void fromMap(const QVariantMap &map);
+   Utils::Store toMap() const;
+   void fromMap(const Utils::Store &map);
 
 private:
    static MinimapSettings* instance();

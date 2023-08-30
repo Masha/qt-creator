@@ -150,8 +150,9 @@ public:
       QSettings* s = Core::ICore::settings();
       if (save)
       {
-         Utils::toSettings(minimapPostFix, QLatin1String("text"), s,
-                           m_instance);
+         Utils::toSettings( minimapPostFix
+                          , "text"
+                          , s, m_instance );
       }
    }
 
@@ -192,7 +193,9 @@ MinimapSettings::MinimapSettings(QObject* parent)
    QTC_ASSERT(!m_instance, return );
    m_instance = this;
    QSettings* s = Core::ICore::settings();
-   Utils::fromSettings(QLatin1String(minimapPostFix), QString("text"), s, m_instance);
+   Utils::fromSettings( minimapPostFix
+                      , "text"
+                      , s, m_instance );
 
    m_settingsPage = new MinimapSettingsPage(this);
    ExtensionSystem::PluginManager::addObject(m_settingsPage);
@@ -209,27 +212,22 @@ MinimapSettings* MinimapSettings::instance()
    return m_instance;
 }
 
-QVariantMap MinimapSettings::toMap() const
+Utils::Store MinimapSettings::toMap() const
 {
-   QVariantMap map;
-   map.insert(QLatin1String(enabledKey), m_enabled);
-   map.insert(QLatin1String(widthKey), m_width);
-   map.insert(QLatin1String(lineCountThresholdKey),
-               m_lineCountThreshold);
-   map.insert( QLatin1String(alphaKey), m_alpha);
+   Utils::Store map;
+   map.insert(enabledKey,              m_enabled);
+   map.insert(widthKey,                m_width);
+   map.insert(lineCountThresholdKey,   m_lineCountThreshold);
+   map.insert(alphaKey,                m_alpha);
    return map;
 }
 
-void MinimapSettings::fromMap(const QVariantMap &map)
+void MinimapSettings::fromMap(const Utils::Store &map)
 {
-   m_enabled =
-      map.value(QLatin1String(enabledKey), m_enabled).toBool();
-   m_width = map.value(QLatin1String(widthKey), m_width).toInt();
-   m_lineCountThreshold =
-      map.value(QLatin1String(lineCountThresholdKey),
-                m_lineCountThreshold)
-         .toInt();
-   m_alpha = map.value(QLatin1String(alphaKey), m_alpha).toInt();
+   m_enabled   = map.value(enabledKey, m_enabled).toBool();
+   m_width     = map.value(widthKey, m_width).toInt();
+   m_lineCountThreshold = map.value(lineCountThresholdKey, m_lineCountThreshold).toInt();
+   m_alpha     = map.value(alphaKey, m_alpha).toInt();
 }
 
 bool MinimapSettings::enabled()
