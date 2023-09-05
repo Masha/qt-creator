@@ -27,6 +27,7 @@
 #include <texteditor/displaysettings.h>
 #include <texteditor/texteditorsettings.h>
 #include <utils/qtcassert.h>
+#include <utils/qtcsettings.h>
 #include <utils/settingsutils.h>
 
 #include <QCheckBox>
@@ -147,7 +148,7 @@ public:
          m_instance->setAlpha(m_alpha->value());
          save = true;
       }
-      QSettings* s = Core::ICore::settings();
+      Utils::QtcSettings* s = Core::ICore::settings();
       if (save)
       {
          Utils::toSettings( minimapPostFix
@@ -192,7 +193,7 @@ MinimapSettings::MinimapSettings(QObject* parent)
 {
    QTC_ASSERT(!m_instance, return );
    m_instance = this;
-   QSettings* s = Core::ICore::settings();
+   Utils::QtcSettings* s = Core::ICore::settings();
    Utils::fromSettings( minimapPostFix
                       , "text"
                       , s, m_instance );
