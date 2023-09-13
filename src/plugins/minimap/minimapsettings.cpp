@@ -28,7 +28,6 @@
 #include <texteditor/texteditorsettings.h>
 #include <utils/qtcassert.h>
 #include <utils/qtcsettings.h>
-#include <utils/settingsutils.h>
 
 #include <QCheckBox>
 #include <QFormLayout>
@@ -151,9 +150,9 @@ public:
       Utils::QtcSettings* s = Core::ICore::settings();
       if (save)
       {
-         Utils::toSettings( minimapPostFix
-                          , "text"
-                          , s, m_instance );
+         Utils::storeToSettings(
+            (std::string("text") + minimapPostFix).c_str()
+            , s, m_instance->toMap() );
       }
    }
 
@@ -194,10 +193,9 @@ MinimapSettings::MinimapSettings(QObject* parent)
    QTC_ASSERT(!m_instance, return );
    m_instance = this;
    Utils::QtcSettings* s = Core::ICore::settings();
-   Utils::fromSettings( minimapPostFix
-                      , "text"
-                      , s, m_instance );
-
+   m_instance->fromMap(Utils::storeFromSettings(
+      (std::string("text") + minimapPostFix).c_str()
+      , s));
    m_settingsPage = new MinimapSettingsPage(this);
    ExtensionSystem::PluginManager::addObject(m_settingsPage);
 }
