@@ -151,7 +151,7 @@ public:
       if (save)
       {
          Utils::storeToSettings(
-            (std::string("text") + minimapPostFix).c_str()
+            QString::fromStdString((std::string("text") + minimapPostFix)).toUtf8()
             , s, m_instance->toMap() );
       }
    }
@@ -194,8 +194,7 @@ MinimapSettings::MinimapSettings(QObject* parent)
    m_instance = this;
    Utils::QtcSettings* s = Core::ICore::settings();
    m_instance->fromMap(Utils::storeFromSettings(
-      (std::string("text") + minimapPostFix).c_str()
-      , s));
+      QString::fromStdString((std::string("text") + minimapPostFix)).toUtf8(), s));
    m_settingsPage = new MinimapSettingsPage(this);
    ExtensionSystem::PluginManager::addObject(m_settingsPage);
 }
