@@ -26,7 +26,7 @@ if (WITH_TESTS)
  add_subdirectory(googletest)
 endif()
 
-add_subdirectory(gocmdbridge)
+# add_subdirectory(gocmdbridge)
 
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/qlitehtml/src/CMakeLists.txt)
   option(BUILD_LIBRARY_QLITEHTML "Build library qlitehtml." ${BUILD_LIBRARIES_BY_DEFAULT})
