@@ -1,9 +1,13 @@
 {
+    "Id" : "drp",
     "Name" : "drp",
     "Version" : "${IDE_VERSION}",
     "CompatVersion" : "${IDE_VERSION_COMPAT}",
+    "VendorId" : "miezhinko",
+    "Vendor" : "Miezhinko",
     "Copyright" : "(C) ${IDE_COPYRIGHT_YEAR} Miezhiko",
     "License" : "GPL v3",
+    "Category" : "Qt Creator",
     "Description" : "Integrate Qt Creator with Discord Rich Presence",
     ${IDE_PLUGIN_DEPENDENCIES}
 }
